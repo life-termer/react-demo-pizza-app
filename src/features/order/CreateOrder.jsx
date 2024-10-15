@@ -69,7 +69,7 @@ function CreateOrder() {
 
         <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
-          <div className="grow">
+          <div className="grow relative">
             <input
               className="input w-full"
               type="text"
@@ -83,9 +83,7 @@ function CreateOrder() {
                 {errorAddress}
               </p>
             )}
-          </div>
-          
-          <span className="absolute right-[6px] top-[5px] z-50 sm:top-[3px] sm:right-[3px]">
+          <span className="absolute right-[3px] top-[3px] z-50 sm:top-[5px] sm:right-[5px]">
             {!position.latitude && !position.longitude && (
               <Button
                 type="small"
@@ -99,6 +97,7 @@ function CreateOrder() {
               </Button>
             )}
           </span>
+          </div>
         </div>
 
         <div className="mb-12 flex items-center gap-5">
@@ -117,6 +116,7 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          <input type="hidden" name='position' value={position.longitude && position.latitude ? `${position.latitude}, ${position.longitude}` : ''} />
           <Button type="primary" disabled={isSubmitting}>
             {isSubmitting || isLoadingAddress
               ? "Placing order..."
